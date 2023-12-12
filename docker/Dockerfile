@@ -1,0 +1,113 @@
+ARG BUILD_ENV="local"
+ARG WWWUSER="www-data"
+ARG WWWGROUP="www-data"
+ARG NODE_VERSION=16
+ARG PROJECT_LOCATION="/var/www/html"
+
+########################
+###### CORE IMAGE ######
+########################
+################################################################################################################################################
+FROM ubuntu:22.04 as core-image
+
+ARG WWWUSER
+ARG WWWGROUP
+ARG NODE_VERSION
+ARG PROJECT_LOCATION
+
+WORKDIR $PROJECT_LOCATION
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV TZ=UTC
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update \
+    && apt-get install -y gnupg gosu curl ca-certificates zip unzip git supervisor sqlite3 libcap2-bin python2 \
+    && mkdir -p ~/.gnupg \
+    && chmod 600 ~/.gnupg \
+    && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
+    && echo "keyserver hkp://keyserver.ubuntu.com:80" >> ~/.gnupg/dirmngr.conf \
+    && gpg --recv-key 0x14aa40ec0831756756d7f66c4f4ea0aae5267a6c \
+    && gpg --export 0x14aa40ec0831756756d7f66c4f4ea0aae5267a6c > /usr/share/keyrings/ppa_ondrej_php.gpg \
+    && echo "deb [signed-by=/usr/share/keyrings/ppa_ondrej_php.gpg] https://ppa.launchpadcontent.net/ondrej/php/ubuntu jammy main" > /etc/apt/sources.list.d/ppa_ondrej_php.list \
+    && apt-get update \
+    && apt-get install -y php8.1-cli \
+       php8.1-pgsql php8.1-sqlite3 php8.1-gd \
+       php8.1-curl \
+       php8.1-imap php8.1-mysql php8.1-mbstring \
+       php8.1-xml php8.1-zip php8.1-bcmath php8.1-soap \
+       php8.1-intl php8.1-readline \
+       php8.1-ldap \
+       php8.1-msgpack php8.1-igbinary php8.1-redis php8.1-swoole \
+       php8.1-memcached php8.1-pcov \
+       apache2 libapache2-mod-php \
+    && php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
+    && curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g npm \
+    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarn.gpg >/dev/null \
+    && echo "deb [signed-by=/usr/share/keyrings/yarn.gpg] https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
+    && apt-get update \
+    && apt-get install -y yarn \
+    && apt-get install -y mysql-client
+
+RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.1
+
+RUN groupadd --force $WWWGROUP
+RUN id -u $WWWUSER &>/dev/null || useradd -ms /bin/bash --no-user-group -g $WWWGROUP $WWWUSER
+ENV APACHE_RUN_USER $WWWUSER
+ENV APACHE_RUN_GROUP $WWWGROUP
+
+COPY ./docker/php.ini /etc/php/8.1/cli/conf.d/99-php.ini
+COPY ./docker/virtaulhost.conf /etc/apache2/sites-available/000-default.conf
+
+RUN a2enmod rewrite
+################################################################################################################################################
+
+
+#########################
+###### LOCAL IMAGE ######
+#########################
+################################################################################################################################################
+FROM core-image as local-image
+RUN apt-get install -y libpng-dev php8.1-dev php8.1-xdebug
+################################################################################################################################################
+
+
+##############################
+###### PRODUCTION IMAGE ######
+##############################
+################################################################################################################################################
+FROM core-image as production-image
+ARG WWWUSER
+ARG WWWGROUP
+ARG PROJECT_LOCATION
+
+WORKDIR $PROJECT_LOCATION
+COPY . .
+################################################################################################################################################
+
+
+#########################
+###### FINAL IMAGE ######
+#########################
+################################################################################################################################################
+FROM ${BUILD_ENV}-image as final-image
+
+ARG BUILD_ENV
+ARG WWWUSER
+ARG WWWGROUP
+ARG PROJECT_LOCATION
+
+RUN apt-get -y autoremove \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+WORKDIR $PROJECT_LOCATION
+RUN chown -hR $WWWGROUP:$WWWUSER ./
+
+RUN echo "#### Build Environment: $BUILD_ENV ####"
+EXPOSE 80
+CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+################################################################################################################################################

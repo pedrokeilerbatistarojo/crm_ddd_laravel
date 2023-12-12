@@ -1,0 +1,8026 @@
+{
+	"info": {
+		"_postman_id": "d429905f-b9cc-46e8-abfc-a76797f24563",
+		"name": "CRM Thermas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13468955"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check for token\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    console.log(jsonData[\"access_token\"]);",
+									"    pm.collectionVariables.set(\"AUTH_TOKEN\", jsonData[\"access_token\"]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "Cyberline",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Cyberline",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check for token\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    console.log(jsonData[\"access_token\"]);",
+									"    pm.collectionVariables.set(\"AUTH_TOKEN\", jsonData[\"access_token\"]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/logout",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check for token\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    console.log(jsonData[\"access_token\"]);",
+									"    pm.collectionVariables.set(\"AUTH_TOKEN\", jsonData[\"access_token\"]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/refresh",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Me",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/me?includes=company",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "company"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Elier",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "info@cyberline.es",
+									"type": "text"
+								},
+								{
+									"key": "default_company_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/me?includes=company",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "company"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Circuit Reservations",
+			"item": [
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/circuit-reservations/1?includes=client,orderDetails,orderDetails.order,orderDetails.product,orderDetails.product.productType",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"circuit-reservations",
+								"1"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "client,orderDetails,orderDetails.order,orderDetails.product,orderDetails.product.productType"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Schedules",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/circuit-reservations/schedules-pdf/2023-01-11",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"circuit-reservations",
+								"schedules-pdf",
+								"2023-01-11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MarkAsUsed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "used",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/circuit-reservations/mark-as-used",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"circuit-reservations",
+								"mark-as-used"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "client,orderDetails,orderDetails.order,orderDetails.product,orderDetails.product.productType",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/circuit-reservations/search?includes=client,orderDetails,orderDetails.order,orderDetails.product,orderDetails.product.productType",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"circuit-reservations",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "client,orderDetails,orderDetails.order,orderDetails.product,orderDetails.product.productType"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Summary",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "date",
+									"value": "2022-12-03",
+									"type": "text"
+								},
+								{
+									"key": "includes",
+									"value": "client,orderDetails,orderDetails.order,orderDetails.product,orderDetails.product.productType",
+									"type": "text"
+								},
+								{
+									"key": "group_results",
+									"value": "time,client_id",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/circuit-reservations/summary",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"circuit-reservations",
+								"summary"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "date",
+									"value": "2022-12-17",
+									"type": "text"
+								},
+								{
+									"key": "time",
+									"value": "09:00",
+									"type": "text"
+								},
+								{
+									"key": "adults",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "children",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "duration",
+									"value": "120",
+									"type": "text"
+								},
+								{
+									"key": "used",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "66",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/circuit-reservations/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"circuit-reservations",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "57",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2022-12-17",
+									"type": "text"
+								},
+								{
+									"key": "time",
+									"value": "09:00",
+									"type": "text"
+								},
+								{
+									"key": "adults",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "children",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "duration",
+									"value": "120",
+									"type": "text"
+								},
+								{
+									"key": "used",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "66",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/circuit-reservations/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"circuit-reservations",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clients",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "postcode",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "created_at_from",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "created_at_to",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/clients/search?includes=clientNotes,clientFiles&id=1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"clients",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "clientNotes,clientFiles"
+								},
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "postcode",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "created_at_from",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "created_at_to",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/clients/export-excel",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"clients",
+								"export-excel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test2@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "document",
+									"value": "00000000T",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "second_last_name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "opt_in",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/clients/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"clients",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test2@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "document",
+									"value": "00000000T",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "second_last_name",
+									"value": "test 2",
+									"type": "text"
+								},
+								{
+									"key": "opt_in",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "lopd_agree",
+									"value": "0",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/clients/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"clients",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "67",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/clients/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"clients",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/clients/60?includes=createdByUser,lastModifiedByUser,clientNotes,clientFiles",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"clients",
+								"60"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,lastModifiedByUser,clientNotes,clientFiles"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client Notes",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/client-notes/search?includes=client",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"client-notes",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "client"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "note",
+									"value": "dolor sit amet...",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/client-notes/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"client-notes",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "note",
+									"value": "lorem ipsum ....",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "95",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/client-notes/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"client-notes",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/client-notes/102?includes=client,createdByUser,lastModifiedByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"client-notes",
+								"102"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "client,createdByUser,lastModifiedByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client Files",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/client-files/search?includes=client,createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"client-files",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "client,createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/elier/Sites/THERMAS/crm-api.thermasdegrinon.com/resources/postman/CRM Thermas.postman_collection.json"
+								},
+								{
+									"key": "description",
+									"value": "otro fichero importado",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/client-files/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"client-files",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"value": "path/to/file/name.jpg",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "95",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/client-files/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"client-files",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/client-files/1?includes=client",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"client-files",
+								"1"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "client"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "File",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/client-files/1/file",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"client-files",
+								"1",
+								"file"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Discounts",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/discounts/search?includes=createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"discounts",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Test",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/discounts/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"discounts",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Test 2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/discounts/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"discounts",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/discounts/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"discounts",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/discounts/1?includes=createdByUser,lastModifiedByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"discounts",
+								"1"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,lastModifiedByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employees",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Laura",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employees/search?includes=createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employees",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employees/6?includes=createdByUser,lastModifiedByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employees",
+								"6"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,lastModifiedByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test-employee@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "employee ",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "second_last_name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "612345678",
+									"type": "text"
+								},
+								{
+									"key": "active",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employees/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employees",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test-employee2@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "employee ",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "second_last_name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "612345678",
+									"type": "text"
+								},
+								{
+									"key": "active",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employees/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employees",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "6",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employees/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employees",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employees Time Off",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "from_date",
+									"value": "2023-02-11 00:00:00",
+									"type": "text"
+								},
+								{
+									"key": "to_date",
+									"value": "2023-02-13 23:59:59",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employee-time-off/search?includes=createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employee-time-off",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employee-time-off/4?includes=createdByUser,lastModifiedByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employee-time-off",
+								"4"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,lastModifiedByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "employee_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Horas",
+									"description": "Día Completo, Horas",
+									"type": "text"
+								},
+								{
+									"key": "from_date",
+									"value": "2023-02-12",
+									"type": "text"
+								},
+								{
+									"key": "to_date",
+									"value": "2023-02-12",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employee-time-off/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employee-time-off",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "employee_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Día Completo",
+									"type": "text"
+								},
+								{
+									"key": "from_date",
+									"value": "2023-02-12 00:00:00",
+									"type": "text"
+								},
+								{
+									"key": "to_date",
+									"value": "2023-02-12 23:59:59",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employee-time-off/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employee-time-off",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employee-time-off/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employee-time-off",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employees Order",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "from_date",
+									"value": "2023-02-11 00:00:00",
+									"type": "text"
+								},
+								{
+									"key": "to_date",
+									"value": "2023-02-13 23:59:59",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employees-order/search?includes=createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employees-order",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employees-order/1?includes=createdByUser,lastModifiedByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employees-order",
+								"1"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,lastModifiedByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "order",
+									"value": "{}",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2023-05-26",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employees-order/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employees-order",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "date\n",
+									"value": "2023-05-26",
+									"type": "text"
+								},
+								{
+									"key": "order\n",
+									"value": "{}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employees-order/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employees-order",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/employees-order/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"employees-order",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Festive",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/festives/search?includes=createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"festives",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "date",
+									"value": "2023-02-12",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Horas",
+									"description": "Día Completo, Horas",
+									"type": "text"
+								},
+								{
+									"key": "closed_hours[]",
+									"value": "09",
+									"type": "text"
+								},
+								{
+									"key": "closed_hours[]",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/festives/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"festives",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2023-02-12",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "test 2",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Horas",
+									"type": "text"
+								},
+								{
+									"key": "closed_hours[]",
+									"value": "08",
+									"type": "text"
+								},
+								{
+									"key": "closed_hours[]",
+									"value": "09",
+									"type": "text"
+								},
+								{
+									"key": "closed_hours[]",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "closed_hours[]",
+									"value": "11",
+									"type": "text"
+								},
+								{
+									"key": "closed_hours[]",
+									"value": "12",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/festives/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"festives",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/festives/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"festives",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/festives/1?includes=createdByUser,lastModifiedByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"festives",
+								"1"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,lastModifiedByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TreatmentScheduleNotes",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/treatment-schedule-notes/search?includes=createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"treatment-schedule-notes",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "date",
+									"value": "2023-02-12",
+									"type": "text"
+								},
+								{
+									"key": "note",
+									"value": "test notes for new",
+									"type": "text"
+								},
+								{
+									"key": "from_hour",
+									"value": "09:00",
+									"type": "text"
+								},
+								{
+									"key": "to_hour",
+									"value": "10:00",
+									"type": "text"
+								},
+								{
+									"key": "employee_id",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/treatment-schedule-notes/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"treatment-schedule-notes",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2023-02-12",
+									"type": "text"
+								},
+								{
+									"key": "note",
+									"value": "test notes for xxxxxxx",
+									"type": "text"
+								},
+								{
+									"key": "from_hour",
+									"value": "09:00",
+									"type": "text"
+								},
+								{
+									"key": "to_hour",
+									"value": "10:00",
+									"type": "text"
+								},
+								{
+									"key": "employee_id",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/treatment-schedule-notes/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"treatment-schedule-notes",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/treatment-schedule-notes/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"treatment-schedule-notes",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/treatment-schedule-notes/8?includes=createdByUser,lastModifiedByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"treatment-schedule-notes",
+								"8"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,lastModifiedByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Localities",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "population",
+									"value": "Las M",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "zip_code",
+									"value": "49699",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/localities/search?includes=province",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"localities",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "province"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "zip_code",
+									"value": "10400",
+									"type": "text"
+								},
+								{
+									"key": "municipio_id",
+									"value": "10400",
+									"type": "text"
+								},
+								{
+									"key": "locality",
+									"value": "Prueba Localidad",
+									"type": "text"
+								},
+								{
+									"key": "population_unit_code",
+									"value": "140050",
+									"type": "text"
+								},
+								{
+									"key": "singular_entity_name",
+									"value": "Prueba Localidad Name",
+									"type": "text"
+								},
+								{
+									"key": "population",
+									"value": "Prueba Localidad",
+									"type": "text"
+								},
+								{
+									"key": "province_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/localities/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"localities",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Provinces",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/localities/provinces",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"localities",
+								"provinces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/localities/1?includes=province",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"localities",
+								"1"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "province"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "created_at_from",
+									"value": "2022-11-26 18:12:44",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "created_at_to",
+									"value": "2022-11-26 18:12:45",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/orders/search?includes=client,client.clientNotes,orderDetails,orderDetails.product,orderDetails.product.productType,createdByUser&client_id=1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"orders",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "client,client.clientNotes,orderDetails,orderDetails.product,orderDetails.product.productType,createdByUser"
+								},
+								{
+									"key": "client_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"auto_increment\": 1,\n\t\"client_id\": 1,\n\t\"details\": [\n\t\t{\n\t\t\t\"line_id\": 0,\n\t\t\t\"price\": 29,\n\t\t\t\"product\": {\n\t\t\t\t\"available\": true,\n\t\t\t\t\"circuit_sessions\": 1,\n\t\t\t\t\"created_at\": \"2022-05-25 17:56:56\",\n\t\t\t\t\"created_by\": null,\n\t\t\t\t\"createdByUser\": null,\n\t\t\t\t\"description\": \"<blockquote class=\\\"blockquote\\\"><p><span style=\\\"color: rgb(57, 132, 198);\\\">Para niños de 8 a 12 años, ambos incluidos. <b>Menores de 8 años no pueden acceder al Centro. </b></span><b><span style=\\\"color: rgb(57, 132, 198);\\\">Deben ir acompañados de un adulto en todo momento. </span><span style=\\\"color: rgb(57, 132, 198);\\\">Imprescindible presentar un documento acreditativo de la edad de los niños en la recepción del Centro (DNI, pasaporte o Libro de Familia). </span><span style=\\\"color: rgb(57, 132, 198);\\\">Se admiten un máximo de tres niños por adulto.</span></b><span style=\\\"color: rgb(57, 132, 198);\\\"><br></span><span style=\\\"color: rgb(57, 132, 198);\\\">Validez de seis meses desde la fecha de compra.</span></p></blockquote><h4 style=\\\"font-family: Roboto, sans-serif, Verdana; color: rgb(0, 0, 0);\\\"><span style=\\\"color: rgb(255, 0, 0);\\\"><span style=\\\"font-weight: bolder;\\\">Por protocolo COVID 19, es imprescindible realizar reserva para todos los días y horas.</span></span></h4>\",\n\t\t\t\t\"editable\": true,\n\t\t\t\t\"id\": 6,\n\t\t\t\t\"image\": \"5eaa975ce1063-ENTRADA INFANTIL.jpg\",\n\t\t\t\t\"last_modified_by\": null,\n\t\t\t\t\"lastModifiedByUser\": null,\n\t\t\t\t\"name\": \"ENTRADA GENERAL INFANTIL\",\n\t\t\t\t\"online_sale\": true,\n\t\t\t\t\"price\": 29,\n\t\t\t\t\"price_type\": \"Fijo\",\n\t\t\t\t\"priority\": 5,\n\t\t\t\t\"product_type_id\": 11,\n\t\t\t\t\"productType\": {\n\t\t\t\t\t\"background_color\": \"#0A427D\",\n\t\t\t\t\t\"category\": \"Circuitos\",\n\t\t\t\t\t\"created_at\": \"2022-05-25 17:49:36\",\n\t\t\t\t\t\"created_by\": null,\n\t\t\t\t\t\"createdByUser\": null,\n\t\t\t\t\t\"id\": 11,\n\t\t\t\t\t\"last_modified_by\": null,\n\t\t\t\t\t\"lastModifiedByUser\": null,\n\t\t\t\t\t\"name\": \"ENTRADA INFANTIL\",\n\t\t\t\t\t\"priority\": 2,\n\t\t\t\t\t\"text_color\": \"#FFFFFF\",\n\t\t\t\t\t\"updated_at\": \"2022-05-25 17:49:36\"\n\t\t\t\t},\n\t\t\t\t\"short_description\": \"Para niños de 8 a 12 años, ambos incluidos\",\n\t\t\t\t\"sku\": \"1062\",\n\t\t\t\t\"slug\": \"entrada-general-infantil\",\n\t\t\t\t\"treatment_sessions\": 0,\n\t\t\t\t\"updated_at\": \"2022-05-25 17:56:56\"\n\t\t\t},\n\t\t\t\"product_id\": 6,\n\t\t\t\"product_name\": \"ENTRADA GENERAL INFANTIL\",\n\t\t\t\"quantity\": 1,\n\t\t\t\"reservations\": [\n\t\t\t\t{\n\t\t\t\t\t\"adults\": 1,\n\t\t\t\t\t\"children\": 1,\n\t\t\t\t\t\"date\": \"2022-12-21\",\n\t\t\t\t\t\"duration\": 12,\n\t\t\t\t\t\"id\": 57,\n\t\t\t\t\t\"time\": \"11:01\",\n\t\t\t\t\t\"type\": \"Circuit\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t],\n\t\"payments\": [\n\t\t{\n\t\t\t\"amount\": \"29\",\n\t\t\t\"paid_amount\": \"29\",\n\t\t\t\"returned_amount\": \"0\",\n\t\t\t\"type\": \"Efectivo\"\n\t\t}\n\t],\n\t\"source\": \"CRM\",\n    \"discount\": \"\",\n\t\"total_price\": 100,\n    \"company_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/orders/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"orders",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "105",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "source",
+									"value": "CRM",
+									"type": "text"
+								},
+								{
+									"key": "discount",
+									"value": "Test",
+									"type": "text"
+								},
+								{
+									"key": "total_price",
+									"value": "110",
+									"type": "text"
+								},
+								{
+									"key": "company_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/orders/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"orders",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/orders/100?includes=client,orderDetails.product.productType,saleSession.employee,payments.order.client,orderDetails.circuitReservations,orderDetails.treatmentReservations,company",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"orders",
+								"100"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "client,orderDetails.product.productType,saleSession.employee,payments.order.client,orderDetails.circuitReservations,orderDetails.treatmentReservations,company"
+								},
+								{
+									"key": "includes",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ticket PDF",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "150",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/orders/ticket",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"orders",
+								"ticket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Production Report PDF",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "created_at_from",
+									"value": "2023-03-01",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "created_at_to",
+									"value": "2023-03-05",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "product_id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "product_type_id",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/orders/production-report",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"orders",
+								"production-report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Ticket Email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "150",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@test.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/orders/send-ticket-email",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"orders",
+								"send-ticket-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MarkUsedPurchase",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "used_purchase",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/orders/mark-used-purchase",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"orders",
+								"mark-used-purchase"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "client,orderDetails,orderDetails.order,orderDetails.product,orderDetails.product.productType",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editNote",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "note",
+									"value": "\"Nota de prueba\"",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/orders/edit-note",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"orders",
+								"edit-note"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "client,orderDetails,orderDetails.order,orderDetails.product,orderDetails.product.productType",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order Detail",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "includes",
+									"value": "productType",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/order-details/search?includes=order,product,product.productType",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"order-details",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "order,product,product.productType"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "order_id",
+									"value": "105",
+									"type": "text"
+								},
+								{
+									"key": "product_id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "product_name",
+									"value": "test2test",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "90",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/order-details/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"order-details",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "order_id",
+									"value": "105",
+									"type": "text"
+								},
+								{
+									"key": "product_id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "product_name",
+									"value": "test2test22",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "90",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "205",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/order-details/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"order-details",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/order-details/271?includes=order,product,product.productType",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"order-details",
+								"271"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "order,product,product.productType"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders Approval",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/orders-approval/search?includes=createdByUser,lastModifiedByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"orders-approval",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,lastModifiedByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Process",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/orders-approval/process",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"orders-approval",
+								"process"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/orders-approval/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"orders-approval",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/orders-approval/3?includes=createdByUser,lastModifiedByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"orders-approval",
+								"3"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,lastModifiedByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "oriental",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "oriental",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "product_type_id",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "available",
+									"value": "false",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "online_sale",
+									"value": "false",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/products/search?includes=productType&paginate_size=1000000",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "productType"
+								},
+								{
+									"key": "paginate_size",
+									"value": "1000000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "sku",
+									"value": "product-circuito-thermal-adulto",
+									"type": "text"
+								},
+								{
+									"key": "slug",
+									"value": "product-circuito-thermal-adulto",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Product Circuito Termal (Adulto)",
+									"type": "text"
+								},
+								{
+									"key": "short_description",
+									"value": "short description",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "description",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "120",
+									"type": "text"
+								},
+								{
+									"key": "price_type",
+									"value": "Fijo",
+									"type": "text"
+								},
+								{
+									"key": "circuit_sessions",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "treatment_sessions",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "priority",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "online_sale",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "editable",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "available",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/products/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "274",
+									"type": "text"
+								},
+								{
+									"key": "sku",
+									"value": "test-sku",
+									"type": "text"
+								},
+								{
+									"key": "slug",
+									"value": "test product",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "test-product",
+									"type": "text"
+								},
+								{
+									"key": "short_description",
+									"value": "short description 2",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "description",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "120",
+									"type": "text"
+								},
+								{
+									"key": "price_type",
+									"value": "Fijo",
+									"type": "text"
+								},
+								{
+									"key": "circuit_sessions",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "treatment_sessions",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "priority",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "online_sale",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "editable",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "available",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "product_type_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/products/update?includes=productType",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products",
+								"update"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "productType"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "224",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/products/delete?includes=productType",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "productType"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/products/2?includes=productType,productDiscounts,productDiscounts.discount",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products",
+								"2"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "productType,productDiscounts,productDiscounts.discount"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product Discounts",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/product-discounts/search?paginate_size=1000000&includes=discount",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"product-discounts",
+								"search"
+							],
+							"query": [
+								{
+									"key": "paginate_size",
+									"value": "1000000"
+								},
+								{
+									"key": "includes",
+									"value": "discount"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/product-discounts/2?includes=discount",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"product-discounts",
+								"2"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "discount"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "product_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "discount_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/product-discounts/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"product-discounts",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "product_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "discount_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "20",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/product-discounts/update?includes=discount",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"product-discounts",
+								"update"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "discount"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "6",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/product-discounts/delete?includes=discount",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"product-discounts",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "discount"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product Types",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/product-types/search?paginate_size=1000000&includes=category&category_id=5",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"product-types",
+								"search"
+							],
+							"query": [
+								{
+									"key": "paginate_size",
+									"value": "1000000"
+								},
+								{
+									"key": "includes",
+									"value": "category"
+								},
+								{
+									"key": "category_id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/product-types/2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"product-types",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "category_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "test product type",
+									"type": "text"
+								},
+								{
+									"key": "priority",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "background_color",
+									"value": "#123123",
+									"type": "text"
+								},
+								{
+									"key": "text_color",
+									"value": "#123123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/product-types/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"product-types",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "280",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "test product type",
+									"type": "text"
+								},
+								{
+									"key": "priority",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "background_color",
+									"value": "#0A427D",
+									"type": "text"
+								},
+								{
+									"key": "text_color",
+									"value": "#FFFFFF",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/product-types/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"product-types",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "280",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/product-types/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"product-types",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/categories/search?paginate_size=1000000",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"categories",
+								"search"
+							],
+							"query": [
+								{
+									"key": "paginate_size",
+									"value": "1000000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/categories/8",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"categories",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test Category",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/categories/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"categories",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "7",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "test category update",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/categories/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"categories",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "7",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/categories/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"categories",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Treatment Reservations",
+			"item": [
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/treatment-reservations/1?includes=client,orderDetails,orderDetails.order,employee",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"treatment-reservations",
+								"1"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "client,orderDetails,orderDetails.order,employee"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/treatment-reservations/search?includes=client,orderDetails,orderDetails.order,employee",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"treatment-reservations",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "client,orderDetails,orderDetails.order,employee"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Summary",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "includes",
+									"value": "client,order_details,order",
+									"type": "text"
+								},
+								{
+									"key": "group_results",
+									"value": "time,client_id",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2022-06-11",
+									"type": "text"
+								},
+								{
+									"key": "date_from",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "date_to",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/treatment-reservations/summary",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"treatment-reservations",
+								"summary"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MarkAsUsed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "used",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/treatment-reservations/mark-as-used",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"treatment-reservations",
+								"mark-as-used"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "client,orderDetails,orderDetails.order,orderDetails.product,orderDetails.product.productType",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Schedules",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/treatment-reservations/schedules-pdf/2023-01-11",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"treatment-reservations",
+								"schedules-pdf",
+								"2023-01-11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Website",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "test",
+									"value": "value",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/website/create-order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"website",
+								"create-order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SaleSessions",
+			"item": [
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/sale-sessions/1?includes=employee,createdByUser,orders,orders.payments",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"sale-sessions",
+								"1"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "employee,createdByUser,orders,orders.payments"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Active",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/sale-sessions/active?includes=employee,createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"sale-sessions",
+								"active"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "employee,createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/sale-sessions/search?includes=createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"sale-sessions",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "session_type",
+									"value": "Mañana",
+									"type": "text"
+								},
+								{
+									"key": "start_amount",
+									"value": "300",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/sale-sessions/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"sale-sessions",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reopen",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/sale-sessions/reopen",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"sale-sessions",
+								"reopen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PDF Orders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/sale-sessions/orders-pdf",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"sale-sessions",
+								"orders-pdf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PDF Payments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/sale-sessions/payments-pdf",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"sale-sessions",
+								"payments-pdf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Close",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "end_date",
+									"value": "2022-11-25 14:00:00",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "end_amount",
+									"value": "1209.30",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/sale-sessions/close",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"sale-sessions",
+								"close"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "start_date",
+									"value": "2022-11-25 08:00:00",
+									"type": "text"
+								},
+								{
+									"key": "end_date",
+									"value": "2022-11-25 14:00:00",
+									"type": "text"
+								},
+								{
+									"key": "start_amount",
+									"value": "250.50",
+									"type": "text"
+								},
+								{
+									"key": "end_amount",
+									"value": "1209.30",
+									"type": "text"
+								},
+								{
+									"key": "employee_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "session_type",
+									"value": "Tarde",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/sale-sessions/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"sale-sessions",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/sale-sessions/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"sale-sessions",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payments",
+			"item": [
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/payments/1?includes=order,createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"payments",
+								"1"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "order,createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/payments/search?includes=createdByUser,order&client_id=12",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"payments",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,order"
+								},
+								{
+									"key": "client_id",
+									"value": "12"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "order_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "due_date",
+									"value": "2022-11-25 18:00:00",
+									"type": "text"
+								},
+								{
+									"key": "paid_date",
+									"value": "2022-11-25 18:00:00",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Efectivo",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "170",
+									"type": "text"
+								},
+								{
+									"key": "paid_amount",
+									"value": "200",
+									"type": "text"
+								},
+								{
+									"key": "returned_amount",
+									"value": "30",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/payments/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"payments",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "order_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "due_date",
+									"value": "2022-11-25 18:00:00",
+									"type": "text"
+								},
+								{
+									"key": "paid_date",
+									"value": "2022-11-25 18:00:00",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Efectivo",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "170.50",
+									"type": "text"
+								},
+								{
+									"key": "paid_amount",
+									"value": "200",
+									"type": "text"
+								},
+								{
+									"key": "returned_amount",
+									"value": "30",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/payments/update?includes=order,createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"payments",
+								"update"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "order,createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/payments/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"payments",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoices",
+			"item": [
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/invoices/1?includes=client,createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"invoices",
+								"1"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "client,createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/invoices/search?includes=createdByUser,client&client_id=2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"invoices",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,client"
+								},
+								{
+									"key": "client_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "invoice_date",
+									"value": "2022-11-25 18:00:00",
+									"type": "text"
+								},
+								{
+									"key": "invoice_type",
+									"value": "Custom",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "cuota xx",
+									"type": "text"
+								},
+								{
+									"key": "observations",
+									"value": "my first observation",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "address",
+									"type": "text"
+								},
+								{
+									"key": "zip_code",
+									"value": "33033",
+									"type": "default"
+								},
+								{
+									"key": "locality",
+									"value": "madrid",
+									"type": "default"
+								},
+								{
+									"key": "province",
+									"value": "madrid",
+									"type": "default"
+								},
+								{
+									"key": "number",
+									"value": "QUEW890QWQ",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/invoices/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"invoices",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "invoice_date",
+									"value": "2022-11-25 18:00:00",
+									"type": "text"
+								},
+								{
+									"key": "invoice_type",
+									"value": "Cuota",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "cuota xx",
+									"type": "text"
+								},
+								{
+									"key": "observations",
+									"value": "my first observation",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "address",
+									"type": "text"
+								},
+								{
+									"key": "zip_code",
+									"value": "33033",
+									"type": "text"
+								},
+								{
+									"key": "locality",
+									"value": "madrid",
+									"type": "text"
+								},
+								{
+									"key": "province",
+									"value": "madrid",
+									"type": "text"
+								},
+								{
+									"key": "number",
+									"value": "QUEW890QWQ",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/invoices/update?includes=client,createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"invoices",
+								"update"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "client,createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/invoices/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"invoices",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GymFeeTypes",
+			"item": [
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-fee-types/1?includes=createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-fee-types",
+								"1"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-fee-types/search?includes=createdByUser&period_type=anual",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-fee-types",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser"
+								},
+								{
+									"key": "period_type",
+									"value": "anual"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "period_type",
+									"value": "mensual",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "tipo 1",
+									"type": "default"
+								},
+								{
+									"key": "price",
+									"value": "25.50",
+									"type": "default"
+								},
+								{
+									"key": "payment_day",
+									"value": "12",
+									"type": "default"
+								},
+								{
+									"key": "hour_from",
+									"value": "09:00",
+									"type": "default"
+								},
+								{
+									"key": "hour_to",
+									"value": "20:00",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-fee-types/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-fee-types",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "period_type",
+									"value": "anual",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "tipo uno",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "150.50",
+									"type": "text"
+								},
+								{
+									"key": "payment_day",
+									"value": "28",
+									"type": "text"
+								},
+								{
+									"key": "hour_from",
+									"value": "08:00",
+									"type": "text"
+								},
+								{
+									"key": "hour_to",
+									"value": "20:00",
+									"type": "text"
+								},
+								{
+									"key": "monday_access",
+									"value": "1",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-fee-types/update?includes=createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-fee-types",
+								"update"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-fee-types/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-fee-types",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GymSubscriptions",
+			"item": [
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscriptions/1?includes=createdByUser,client,gymFeeType",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscriptions",
+								"1"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,client,gymFeeType"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscriptions/search?includes=createdByUser,client,gymFeeType",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscriptions",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,client,gymFeeType"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "gym_fee_type_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "gym_fee_type_name",
+									"value": "type one",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "25.50",
+									"type": "text"
+								},
+								{
+									"key": "activation_date",
+									"value": "03/05/2023",
+									"type": "text"
+								},
+								{
+									"key": "start_date",
+									"value": "03/08/2023",
+									"type": "text"
+								},
+								{
+									"key": "expiration_date",
+									"value": "04/08/2023",
+									"type": "text"
+								},
+								{
+									"key": "payment_day",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "biweekly_payment_day",
+									"value": "25",
+									"type": "text"
+								},
+								{
+									"key": "payment_type",
+									"value": "tarjeta",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscriptions/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscriptions",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "gym_fee_type_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "gym_fee_type_name",
+									"value": "type one",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "25.50",
+									"type": "text"
+								},
+								{
+									"key": "activation_date",
+									"value": "03/05/2023",
+									"type": "text"
+								},
+								{
+									"key": "start_date",
+									"value": "03/08/2023",
+									"type": "text"
+								},
+								{
+									"key": "expiration_date",
+									"value": "04/08/2023",
+									"type": "text"
+								},
+								{
+									"key": "payment_day",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "biweekly_payment_day",
+									"value": "25",
+									"type": "text"
+								},
+								{
+									"key": "payment_type",
+									"value": "efectivo",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscriptions/update?includes=createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscriptions",
+								"update"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscriptions/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscriptions",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GymSubscriptionMembers",
+			"item": [
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-members/4?includes=createdByUser,client",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-members",
+								"4"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,client"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-members/search?includes=createdByUser,client,gymSubscription",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-members",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,client,gymSubscription"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "gym_subscription_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "date_from",
+									"value": "02/27/2023",
+									"type": "text"
+								},
+								{
+									"key": "date_to",
+									"value": "02/28/2023",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-members/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-members",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "gym_subscription_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "date_from",
+									"value": "01/27/2023",
+									"type": "text"
+								},
+								{
+									"key": "date_to",
+									"value": "01/28/2023",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-members/update?includes=createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-members",
+								"update"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-members/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-members",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GymSubscriptionMemberAccess",
+			"item": [
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-member-access/3?includes=createdByUser,client",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-member-access",
+								"3"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,client"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-member-access/search?includes=createdByUser,gymSubscriptionMember",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-member-access",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,gymSubscriptionMember"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "member_id",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "date_from",
+									"value": "01/01/2023",
+									"type": "text"
+								},
+								{
+									"key": "date_to",
+									"value": "01/31/2023",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-member-access/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-member-access",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "member_id",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "date_from",
+									"value": "01/01/2023",
+									"type": "text"
+								},
+								{
+									"key": "date_to",
+									"value": "03/31/2023",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-member-access/update?includes=createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-member-access",
+								"update"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-member-access/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-member-access",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GymSubscriptionMemberAccessRights",
+			"item": [
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-member-access-rights/1?includes=createdByUser,gymSubscriptionMember",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-member-access-rights",
+								"1"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,gymSubscriptionMember"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-member-access-rights/search?includes=createdByUser,gymSubscriptionMember",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-member-access-rights",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,gymSubscriptionMember"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "member_id",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "date_from",
+									"value": "01/01/2023",
+									"type": "text"
+								},
+								{
+									"key": "date_to",
+									"value": "01/31/2023",
+									"type": "text"
+								},
+								{
+									"key": "hour_from",
+									"value": "0700",
+									"type": "text"
+								},
+								{
+									"key": "hour_to",
+									"value": "0900",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-member-access-rights/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-member-access-rights",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "member_id",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "date_from",
+									"value": "01/01/2023",
+									"type": "text"
+								},
+								{
+									"key": "date_to",
+									"value": "03/31/2023",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-member-access-rights/update?includes=createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-member-access-rights",
+								"update"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-member-access-rights/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-member-access-rights",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GymSubscriptionQuotas",
+			"item": [
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-quotas/2?includes=createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-quotas",
+								"2"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-quotas/search?includes=createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-quotas",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "amount",
+									"value": "25.50",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "03/05/2023",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "confirmada",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-quotas/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-quotas",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "95.50",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "03/05/2023",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "confirmada",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-quotas/update?includes=createdByUser",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-quotas",
+								"update"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/gym-subscription-quotas/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"gym-subscription-quotas",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/search?includes=createdByUser,company",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"search"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,company"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test2@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "prueba",
+									"type": "text"
+								},
+								{
+									"key": "default_company_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test2@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "prueba",
+									"type": "text"
+								},
+								{
+									"key": "default_company_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password_confirmation",
+									"value": "123456",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/update",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/delete",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/3?includes=createdByUser,lastModifiedByUser,company",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"3"
+							],
+							"query": [
+								{
+									"key": "includes",
+									"value": "createdByUser,lastModifiedByUser,company"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Festives",
+			"item": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.addHeader({key: 'Accept', value: 'application/json'});",
+					"var token = pm.collectionVariables.get('AUTH_TOKEN');",
+					"if (token != '') {",
+					"    pm.request.headers.add({key: 'Authorization', value: 'Bearer ' + token});",
+					"}",
+					"console.log(pm.request.headers);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:8001/api",
+			"type": "string"
+		},
+		{
+			"key": "AUTH_TOKEN",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
